@@ -1,11 +1,10 @@
 # -*- coding: utf-8 -*-
 import hashlib
-import lxml
+from xml import etree
+
 import web
 import time
 import os
-
-from pip._vendor.html5lib.treebuilders import etree
 
 
 class WeixinInterface:
