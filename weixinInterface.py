@@ -5,6 +5,8 @@ import web
 import time
 import os
 
+from pip._vendor.html5lib.treebuilders import etree
+
 
 class WeixinInterface:
     def __init__(self):
