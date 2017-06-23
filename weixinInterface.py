@@ -66,8 +66,10 @@ class WeixinInterface:
             msgType = xml.find("MsgType").text
             fromUser = xml.find("FromUserName").text
             toUser = xml.find("ToUserName").text
+            content = xml.find("Content").text.encode("utf-8")
+            print content
             if msgType == 'text':
-                content = xml.find("Content").text.encode("utf-8")
+
                 return self.render.reply_text(toUser, fromUser, int(time.time()), "test")
             elif msgType == 'image':
                 pass
