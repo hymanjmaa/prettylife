@@ -2,7 +2,6 @@
 import os
 import sae
 import web
-import sae
 sae.add_vendor_dir('vendor')
 from prettylifeInterface import PrettyLifeInterface
 
