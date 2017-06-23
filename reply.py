@@ -1,12 +1,16 @@
 # -*- coding: utf-8 -*-
 import time
+import os
+import web
 __author__ = 'Hyman'
 __time__ = '2017-06-23 9:23'
 
 
 class Msg(object):
     def __init__(self):
-        pass
+        self.app_root = os.path.dirname(__file__)
+        self.templates_root = os.path.join(self.app_root, 'templates')
+        self.render = web.template.render(self.templates_root)
 
     def send(self):
         return "success"
@@ -30,7 +34,8 @@ class TextMsg(Msg):
         <Content><![CDATA[{Content}]]></Content>
         </xml>
         """
-        return XmlForm.format(**self.__dict)
+        # return XmlForm.format(**self.__dict)
+        return self.render.reply_text(**self.__dict)
 
 
 class ImageMsg(Msg):
