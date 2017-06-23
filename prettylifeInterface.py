@@ -49,7 +49,7 @@ class PrettyLifeInterface:
             if isinstance(recMsg, receive.Msg):
                 toUser = recMsg.FromUserName
                 fromUser = recMsg.ToUserName
-                userid = fromUser[0:15]
+                userid = hashlib.md5(fromUser).hexdigest()
                 if recMsg.MsgType == 'text':
                     content = recMsg.Content
                     try:
