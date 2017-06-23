@@ -51,9 +51,9 @@ class PrettyLifeInterface:
                 fromUser = recMsg.ToUserName
                 if recMsg.MsgType == 'text':
                     content = recMsg.Content
-                    # msg = talk_tuling_api.talk(content)
-                    # replyMsg = reply.TextMsg(toUser, fromUser, msg.encode("utf-8"))
-                    replyMsg = reply.TextMsg(toUser, fromUser, content)
+                    msg = talk_tuling_api.talk(content)
+                    replyMsg = reply.TextMsg(toUser, fromUser, msg.encode("utf-8"))
+                    # replyMsg = reply.TextMsg(toUser, fromUser, content)
                     return replyMsg.send()
                 if recMsg.MsgType == 'image':
                     mediaId = recMsg.MediaId
