@@ -76,8 +76,10 @@ class PrettyLifeInterface:
                     return replyMsg.send()
                     # return reply.Msg().send()
             else:
+                replyMsg = reply.TextMsg(recMsg.FromUserName, recMsg.ToUserName, '有bug你懂的')
+                return replyMsg.send()
                 # print "暂且不处理"
-                return "success"
+                # return "success"
         except Exception, Argment:
             return Argment
 
