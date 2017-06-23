@@ -51,13 +51,24 @@ class PrettyLifeInterface:
                 fromUser = recMsg.ToUserName
                 if recMsg.MsgType == 'text':
                     content = recMsg.Content
-                    msg = talk_tuling_api.talk(content)
-                    replyMsg = reply.TextMsg(toUser, fromUser, msg)
-                    # replyMsg = reply.TextMsg(toUser, fromUser, content)
+                    try:
+                        msg = talk_tuling_api.talk(content)
+                        replyMsg = reply.TextMsg(toUser, fromUser, msg)
+                    except:
+                        replyMsg = reply.TextMsg(toUser, fromUser, "没听懂咋整啊")
+                        # replyMsg = reply.TextMsg(toUser, fromUser, content)
                     return replyMsg.send()
                 if recMsg.MsgType == 'image':
                     mediaId = recMsg.MediaId
                     replyMsg = reply.ImageMsg(toUser, fromUser, mediaId)
+                    return replyMsg.send()
+                if recMsg.MsgType == 'voice':
+                    content = recMsg.find('Recognition').text
+                    try:
+                        msg = talk_tuling_api.talk(content)
+                        replyMsg = reply.TextMsg(toUser, fromUser, msg)
+                    except:
+                        replyMsg = reply.TextMsg(toUser, fromUser, '这货还不够聪明，换句话聊天吧')
                     return replyMsg.send()
                 else:
                     return reply.Msg().send()
