@@ -1,11 +1,14 @@
 # -*- coding: utf-8 -*-
 import hashlib
 import web
+
 import receive
 import reply
 
 
 class PrettyLifeInterface:
+    def __init__(self):
+        pass
 
     def GET(self):
         try:
@@ -43,10 +46,11 @@ class PrettyLifeInterface:
             if isinstance(recMsg, receive.Msg) and recMsg.MsgType == 'text':
                 toUser = recMsg.FromUserName
                 fromUser = recMsg.ToUserName
-                content = recMsg.Content
+                content = "test"
                 replyMsg = reply.TextMsg(toUser, fromUser, content)
                 return replyMsg.send()
             else:
+                print "暂且不处理"
                 return "success"
         except Exception, Argment:
             return Argment
