@@ -1,15 +1,16 @@
 # -*- coding: utf-8 -*-
 import hashlib
+
+import time
 import web
-import reply
-import receive
+import xml.etree.ElementTree as ET
 
 
 class WeixinInterface:
-    # def __init__(self):
-    #     self.app_root = os.path.dirname(__file__)
-    #     self.templates_root = os.path.join(self.app_root, 'templates')
-    #     self.render = web.template.render(self.templates_root)
+    def __init__(self):
+        self.app_root = os.path.dirname(__file__)
+        self.templates_root = os.path.join(self.app_root, 'templates')
+        self.render = web.template.render(self.templates_root)
 
     def GET(self):
         try:
@@ -40,30 +41,36 @@ class WeixinInterface:
             return Argument
 
     def POST(self):
+        # try:
+        #     webData = web.data()
+        #     # print "Handle Post webdata is ", webData  # 后台打日志
+        #     recMsg = receive.parse_xml(webData)
+        #     if isinstance(recMsg, receive.Msg) and recMsg.MsgType == 'text':
+        #         toUser = recMsg.FromUserName
+        #         fromUser = recMsg.ToUserName
+        #         content = recMsg.Content
+        #         replyMsg = reply.TextMsg(toUser, fromUser, content)
+        #         return replyMsg.send()
+        #     else:
+        #         print "暂且不处理"
+        #         return "success"
+        # except Exception, Argment:
+        #     return Argment
+
         try:
-            webData = web.data()
-            # print "Handle Post webdata is ", webData  # 后台打日志
-            recMsg = receive.parse_xml(webData)
-            if isinstance(recMsg, receive.Msg) and recMsg.MsgType == 'text':
-                toUser = recMsg.FromUserName
-                fromUser = recMsg.ToUserName
-                content = recMsg.Content
-                replyMsg = reply.TextMsg(toUser, fromUser, content)
-                return replyMsg.send()
+            webData = web.data()  # 获得post来的数据
+            if len(webData) == 0:
+                return None
+            xml = ET.fromstring(webData)
+            msgType = xml.find("MsgType").text
+            fromUser = xml.find("FromUserName").text
+            toUser = xml.find("ToUserName").text
+            if msgType == 'text':
+                content = xml.find("Content").text
+                return self.render.reply_text(fromUser, toUser, int(time.time()), content)
+            elif msgType == 'image':
+                pass
             else:
-                print "暂且不处理"
                 return "success"
         except Exception, Argment:
             return Argment
-        # str_xml = web.data()  # 获得post来的数据
-        # xml = etree.fromstring(str_xml)  # 进行XML解析
-        # msgType = xml.find("MsgType").text
-        # fromUser = xml.find("FromUserName").text
-        # toUser = xml.find("ToUserName").text
-        # if msgType == 'text':
-        #     content = xml.find("Content").text
-        #     return self.render.reply_text(fromUser, toUser, int(time.time()), "test")
-        # elif msgType == 'image':
-        #     pass
-        # else:
-        #     pass
