@@ -4,6 +4,7 @@ import web
 import os
 import receive
 import reply
+import talk_tuling_api
 
 
 class PrettyLifeInterface:
@@ -50,7 +51,8 @@ class PrettyLifeInterface:
                 fromUser = recMsg.ToUserName
                 if recMsg.MsgType == 'text':
                     content = recMsg.Content
-                    replyMsg = reply.TextMsg(toUser, fromUser, content)
+                    msg = talk_tuling_api.talk(content)
+                    replyMsg = reply.TextMsg(toUser, fromUser, msg)
                     return replyMsg.send()
                 if recMsg.MsgType == 'image':
                     mediaId = recMsg.MediaId
@@ -59,7 +61,7 @@ class PrettyLifeInterface:
                 else:
                     return reply.Msg().send()
             else:
-                print "暂且不处理"
+                # print "暂且不处理"
                 return "success"
         except Exception, Argment:
             return Argment
