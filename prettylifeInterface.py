@@ -53,7 +53,7 @@ class PrettyLifeInterface:
                     replyMsg = reply.TextMsg(toUser, fromUser, content)
                     return replyMsg.send()
                 if recMsg.MsgType == 'image':
-                    mediaId = recMsg.MediaId
+                    # mediaId = recMsg.MediaId
                     # replyMsg = reply.ImageMsg(toUser, fromUser, mediaId)
                     replyMsg = reply.TextMsg(toUser, fromUser, "received")
                     return replyMsg.send()
