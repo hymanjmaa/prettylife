@@ -64,11 +64,12 @@ class PrettyLifeInterface:
                     return replyMsg.send()
                 if recMsg.MsgType == 'voice':
                     content = recMsg.Recognition
-                    try:
-                        msg = talk_tuling_api.talk(content)
-                        replyMsg = reply.TextMsg(toUser, fromUser, msg)
-                    except:
-                        replyMsg = reply.TextMsg(toUser, fromUser, '这货还不够聪明，换句话聊天吧')
+                    replyMsg = reply.TextMsg(toUser, fromUser, '这货还不够聪明，换句话聊天吧'+content)
+                    # try:
+                    #     msg = talk_tuling_api.talk(content)
+                    #     replyMsg = reply.TextMsg(toUser, fromUser, msg)
+                    # except:
+                    #     replyMsg = reply.TextMsg(toUser, fromUser, '这货还不够聪明，换句话聊天吧')
                     return replyMsg.send()
                 else:
                     return reply.Msg().send()
