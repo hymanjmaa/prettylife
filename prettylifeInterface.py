@@ -63,7 +63,7 @@ class PrettyLifeInterface:
                     replyMsg = reply.ImageMsg(toUser, fromUser, mediaId)
                     return replyMsg.send()
                 if recMsg.MsgType == 'voice':
-                    content = recMsg.find('Recognition').text
+                    content = recMsg.Recognition
                     try:
                         msg = talk_tuling_api.talk(content)
                         replyMsg = reply.TextMsg(toUser, fromUser, msg)
