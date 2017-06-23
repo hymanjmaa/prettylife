@@ -3,10 +3,10 @@ import os
 import sae
 import web
 
-from weixinInterface import WeixinInterface
+from prettylifeInterface import PrettyLifeInterface
 
 urls = (
-'/weixin','WeixinInterface'
+'/weixin','PrettyLifeInterface'
 )
 
 app = web.application(urls, globals()).wsgifunc()        

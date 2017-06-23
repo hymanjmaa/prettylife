@@ -5,7 +5,7 @@ import receive
 import reply
 
 
-class WeixinInterface:
+class PrettyLifeInterface:
 
     def GET(self):
         try:
@@ -50,3 +50,4 @@ class WeixinInterface:
                 return "success"
         except Exception, Argment:
             return Argment
+
