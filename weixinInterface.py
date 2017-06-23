@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import hashlib
 import web
-import os
 import receive
 import reply
 
@@ -37,22 +36,6 @@ class WeixinInterface:
             return Argument
 
     def POST(self):
-        # try:
-        #     webData = web.data()
-        #     # print "Handle Post webdata is ", webData  # 后台打日志
-        #     recMsg = receive.parse_xml(webData)
-        #     if isinstance(recMsg, receive.Msg) and recMsg.MsgType == 'text':
-        #         toUser = recMsg.FromUserName
-        #         fromUser = recMsg.ToUserName
-        #         content = recMsg.Content
-        #         replyMsg = reply.TextMsg(toUser, fromUser, content)
-        #         return replyMsg.send()
-        #     else:
-        #         print "暂且不处理"
-        #         return "success"
-        # except Exception, Argment:
-        #     return Argment
-
         try:
             webData = web.data()
             # print "Handle Post webdata is ", webData  # 后台打日志
@@ -68,22 +51,3 @@ class WeixinInterface:
                 return "success"
         except Exception, Argment:
             return Argment
-
-        # try:
-        #     webData = web.data()  # 获得post来的数据
-        #     if len(webData) == 0:
-        #         return None
-        #     xml = ET.fromstring(webData)
-        #     msgType = xml.find("MsgType").text
-        #     fromUser = xml.find("FromUserName").text
-        #     toUser = xml.find("ToUserName").text
-        #     content = xml.find("Content").text.encode("utf-8")
-        #     if msgType == 'text':
-        #
-        #         return self.render.reply_text(fromUser, toUser, int(time.time()), msgType, content)
-        #     elif msgType == 'image':
-        #         pass
-        #     else:
-        #         return "success"
-        # except Exception, Argment:
-        #     return Argment
