@@ -4,6 +4,7 @@ import hashlib
 import time
 import web
 import xml.etree.ElementTree as ET
+import os
 
 
 class WeixinInterface:
