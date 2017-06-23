@@ -27,3 +27,7 @@ def talk(content):
     else:
         recontent = '小慢还没学会怎么回复这句话'
     return recontent
+
+
+if __name__ == "__main__":
+    print talk("你好")
