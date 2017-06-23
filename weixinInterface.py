@@ -11,7 +11,6 @@ class WeixinInterface:
     #     self.templates_root = os.path.join(self.app_root, 'templates')
     #     self.render = web.template.render(self.templates_root)
 
-    @property
     def GET(self):
         try:
             # 获取输入参数
