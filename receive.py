@@ -42,4 +42,4 @@ class ImageMsg(Msg):
 class VoiceMsg(Msg):
     def __init__(self, xmlData):
         Msg.__init__(self, xmlData)
-        self.Recongnition = xmlData.find('Recongnition').text
+        self.Recongnition = xmlData.find('Recongnition').text.decode("utf-8")
