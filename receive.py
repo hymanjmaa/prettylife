@@ -13,6 +13,8 @@ def parse_xml(web_data):
         return TextMsg(xmlData)
     elif msg_type == 'image':
         return ImageMsg(xmlData)
+    elif msg_type == 'voice':
+        return VoiceMsg(xmlData)
 
 
 class Msg(object):
@@ -35,3 +37,9 @@ class ImageMsg(Msg):
         Msg.__init__(self, xmlData)
         self.PicUrl = xmlData.find('PicUrl').text
         self.MediaId = xmlData.find('MediaId').text
+
+
+class VoiceMsg(Msg):
+    def __init__(self, xmlData):
+        Msg.__init__(self, xmlData)
+        self.Recongnition = xmlData.find('Recongnition').text
