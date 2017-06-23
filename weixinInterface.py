@@ -73,6 +73,6 @@ class WeixinInterface:
             elif msgType == 'image':
                 pass
             else:
-                return "success"
+                return "f"
         except Exception, Argment:
             return Argment
