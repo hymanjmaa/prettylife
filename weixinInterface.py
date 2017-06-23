@@ -70,7 +70,7 @@ class WeixinInterface:
             print content
             if msgType == 'text':
 
-                return self.render.reply_text(toUser, fromUser, int(time.time()), "test")
+                return self.render.reply_text(fromUser, toUser, int(time.time()), msgType, "test")
             elif msgType == 'image':
                 pass
             else:
