@@ -47,7 +47,6 @@ class WeixinInterface:
                 replyMsg = reply.TextMsg(toUser, fromUser, content)
                 return replyMsg.send()
             else:
-                print "暂且不处理"
                 return "success"
         except Exception, Argment:
             return Argment
