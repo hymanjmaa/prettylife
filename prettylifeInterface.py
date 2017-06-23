@@ -72,7 +72,9 @@ class PrettyLifeInterface:
                     #     replyMsg = reply.TextMsg(toUser, fromUser, '这货还不够聪明，换句话聊天吧')
                     return replyMsg.send()
                 else:
-                    return reply.Msg().send()
+                    replyMsg = reply.TextMsg(toUser, fromUser, recMsg)
+                    return replyMsg.send()
+                    # return reply.Msg().send()
             else:
                 # print "暂且不处理"
                 return "success"
