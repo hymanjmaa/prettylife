@@ -9,9 +9,9 @@ global s
 s = requests.session()
 
 
-def talk(content):
+def talk(content, userid):
     url = 'http://www.tuling123.com/openapi/api'
-    da = {"key": "ec047e7c35f540dab4b34dfa06fa9a32", "info": content}
+    da = {"key": "ec047e7c35f540dab4b34dfa06fa9a32", "info": content, "userid": userid}
     data = json.dumps(da)
     r = s.post(url, data=data)
     j = eval(r.text)

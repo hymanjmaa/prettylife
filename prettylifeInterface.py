@@ -49,10 +49,11 @@ class PrettyLifeInterface:
             if isinstance(recMsg, receive.Msg):
                 toUser = recMsg.FromUserName
                 fromUser = recMsg.ToUserName
+                userid = fromUser[0:15]
                 if recMsg.MsgType == 'text':
                     content = recMsg.Content
                     try:
-                        msg = talk_tuling_api.talk(content)
+                        msg = talk_tuling_api.talk(content, userid)
                         replyMsg = reply.TextMsg(toUser, fromUser, msg)
                     except:
                         replyMsg = reply.TextMsg(toUser, fromUser, "没听懂咋整啊")
@@ -64,17 +65,14 @@ class PrettyLifeInterface:
                     return replyMsg.send()
                 if recMsg.MsgType == 'voice':
                     content = recMsg.Recognition
-                    replyMsg = reply.TextMsg(toUser, fromUser, '这货还不够聪明，换句话聊天吧'+content)
-                    # try:
-                    #     msg = talk_tuling_api.talk(content)
-                    #     replyMsg = reply.TextMsg(toUser, fromUser, msg)
-                    # except:
-                    #     replyMsg = reply.TextMsg(toUser, fromUser, '这货还不够聪明，换句话聊天吧')
+                    try:
+                        msg = talk_tuling_api.talk(content, userid)
+                        replyMsg = reply.TextMsg(toUser, fromUser, msg)
+                    except:
+                        replyMsg = reply.TextMsg(toUser, fromUser, '这货还不够聪明，换句话聊天吧')
                     return replyMsg.send()
                 else:
-                    replyMsg = reply.TextMsg(toUser, fromUser, recMsg)
-                    return replyMsg.send()
-                    # return reply.Msg().send()
+                    return reply.Msg().send()
             else:
                 # print "暂且不处理"
                 return "success"
