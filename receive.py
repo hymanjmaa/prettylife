@@ -44,4 +44,4 @@ class VoiceMsg(Msg):
         Msg.__init__(self, xmlData)
         self.MediaId = xmlData.find('MediaId').text
         self.Format = xmlData.find('Format').text
-        self.Recongnition = xmlData.find('Recongnition').text
+        self.Recognition = xmlData.find('Recognition').text
