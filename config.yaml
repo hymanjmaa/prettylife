@@ -8,4 +8,7 @@ libraries:
 - name: requests
   version: "2.6.0"
 
+- name: poster
+  version: "0.8.1"
+
 ...
