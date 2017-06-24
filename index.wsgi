@@ -7,7 +7,7 @@ from prettylifeInterface import PrettyLifeInterface
 from menu import main
 
 urls = (
-'/weixin','PrettyLifeInterface'，
+'/weixin','PrettyLifeInterface',
 '/weixin','main'
 )
 
