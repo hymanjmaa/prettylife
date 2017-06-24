@@ -42,4 +42,6 @@ class ImageMsg(Msg):
 class VoiceMsg(Msg):
     def __init__(self, xmlData):
         Msg.__init__(self, xmlData)
+        self.MediaId = xmlData.find('MediaId').text
+        self.Format = xmlData.find('Format').text
         self.Recongnition = xmlData.find('Recongnition').text
