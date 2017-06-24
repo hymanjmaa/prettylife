@@ -4,9 +4,9 @@ import os
 
 import web
 
-import receive
-import reply
-import talk_tuling_api
+import weixin.receive
+import weixin.reply
+import weixin.talk_tuling_api
 
 
 class PrettyLifeInterface:
@@ -47,38 +47,38 @@ class PrettyLifeInterface:
         try:
             webData = web.data()
             # print "Handle Post webdata is ", webData  # 后台打日志
-            recMsg = receive.parse_xml(webData)
-            if isinstance(recMsg, receive.Msg):
+            recMsg = weixin.receive.parse_xml(webData)
+            if isinstance(recMsg, weixin.receive.Msg):
                 toUser = recMsg.FromUserName
                 fromUser = recMsg.ToUserName
                 userid = hashlib.md5(fromUser).hexdigest()
                 if recMsg.MsgType == 'text':
                     content = recMsg.Content
                     try:
-                        msg = talk_tuling_api.talk(content, userid)
-                        replyMsg = reply.TextMsg(toUser, fromUser, msg)
+                        msg = weixin.talk_tuling_api.talk(content, userid)
+                        replyMsg = weixin.reply.TextMsg(toUser, fromUser, msg)
                     except:
-                        replyMsg = reply.TextMsg(toUser, fromUser, "没听懂咋整啊")
+                        replyMsg = weixin.reply.TextMsg(toUser, fromUser, "没听懂咋整啊")
                         # replyMsg = reply.TextMsg(toUser, fromUser, content)
                     return replyMsg.send()
                 if recMsg.MsgType == 'image':
                     mediaId = recMsg.MediaId
-                    replyMsg = reply.ImageMsg(toUser, fromUser, mediaId)
+                    replyMsg = weixin.reply.ImageMsg(toUser, fromUser, mediaId)
                     return replyMsg.send()
                 if recMsg.MsgType == 'voice':
                     content = recMsg.Recognition
                     try:
-                        msg = talk_tuling_api.talk(content, userid)
-                        replyMsg = reply.TextMsg(toUser, fromUser, msg)
+                        msg = weixin.talk_tuling_api.talk(content, userid)
+                        replyMsg = weixin.reply.TextMsg(toUser, fromUser, msg)
                     except:
-                        replyMsg = reply.TextMsg(toUser, fromUser, '这货还不够聪明，换句话聊天吧')
+                        replyMsg = weixin.reply.TextMsg(toUser, fromUser, '这货还不够聪明，换句话聊天吧')
                     return replyMsg.send()
                 else:
-                    replyMsg = reply.TextMsg(toUser, fromUser, '这货还处理不了这种类型的聊天')
+                    replyMsg = weixin.reply.TextMsg(toUser, fromUser, '这货还处理不了这种类型的聊天')
                     return replyMsg.send()
                     # return reply.Msg().send()
             else:
-                replyMsg = reply.TextMsg(recMsg.FromUserName, recMsg.ToUserName, '有bug你懂的')
+                replyMsg = weixin.reply.TextMsg(recMsg.FromUserName, recMsg.ToUserName, '有bug你懂的')
                 return replyMsg.send()
                 # print "暂且不处理"
                 # return "success"
