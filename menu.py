@@ -42,7 +42,7 @@ def createMenu():
             {
                 "type": "click",
                 "name": "马小骏",
-                "key":  "mpGuide"
+                "key":  "hymanj"
             },
             {
                 "name": "PrettyLife",
