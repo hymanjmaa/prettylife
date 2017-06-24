@@ -33,7 +33,7 @@ class Menu(object):
         print urlResp.read()
 
 
-def main():
+def createMenu():
     myMenu = Menu()
     postJson = """
     {
@@ -74,4 +74,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    createMenu()
