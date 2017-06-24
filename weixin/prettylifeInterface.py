@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 import hashlib
-import web
 import os
+
+import web
+
 import receive
 import reply
 import talk_tuling_api
