@@ -100,7 +100,7 @@ class PrettyLifeInterface:
                     try:
                         replyMsg = reply.VideoMsg(toUser, fromUser, mediaId)
                     except Exception:
-                        replyMsg = reply.TextMsg(toUser, fromUser, replyMsg)
+                        replyMsg = reply.TextMsg(toUser, fromUser, replyMsg.send())
                     return replyMsg.send()
 
                 if recMsg.MsgType == 'shortvideo':  # 小视频消息处理
