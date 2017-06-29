@@ -110,12 +110,15 @@ class PrettyLifeInterface:
                     replyMsg = reply.TextMsg(toUser, fromUser, loc)
                     return replyMsg.send()
 
-                if recMsg.MsgType == 'link':
-                    Title = recMsg.Title
-                    Description = recMsg.Description
-                    Url = recMsg.Url
-                    msg = Title+Description+Url
-                    replyMsg = reply.TextMsg(toUser, fromUser, msg)
+                if recMsg.MsgType == 'link':  # 公众号链接消息
+                    try:
+                        Title = recMsg.Title
+                        Description = recMsg.Description
+                        Url = recMsg.Url
+                        msg = Title+Description+Url
+                        replyMsg = reply.TextMsg(toUser, fromUser, msg)
+                    except Exception:
+                        replyMsg = reply.TextMsg(toUser, fromUser, "爱学习的好孩子,love you")
                     return replyMsg.send()
 
                 else:
