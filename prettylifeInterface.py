@@ -73,7 +73,7 @@ class PrettyLifeInterface:
                 if recMsg.MsgType == 'text':  # 文本消息处理
                     content = recMsg.Content  # 去除用户发送文本
                     try:
-                        if content == 'love':
+                        if content == 'music':
                             # 版权原因无法实现音乐消息
                             # replyMsg = reply.MusicMsg(toUser, fromUser, 'test', 'test', 'http://up.mcyt.net/md5/53/MjA1MTQ0NjI=_Qq4329912.mp3', 'http://up.mcyt.net/md5/53/MjA1MTQ0NjI=_Qq4329912.mp3')
                             replyMsg = reply.TextMsg(toUser, fromUser, '<a href="http://music.163.com/m/song?id=476987525">☞来个Music吧☜</a>')
