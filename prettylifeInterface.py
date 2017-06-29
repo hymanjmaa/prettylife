@@ -74,7 +74,9 @@ class PrettyLifeInterface:
                     content = recMsg.Content  # 去除用户发送文本
                     try:
                         if content == 'love':
-                            replyMsg = reply.MusicMsg(toUser, fromUser, 'test', 'test', 'http://up.mcyt.net/md5/53/MjA1MTQ0NjI=_Qq4329912.mp3', 'http://up.mcyt.net/md5/53/MjA1MTQ0NjI=_Qq4329912.mp3')
+                            # 版权原因无法实现音乐消息
+                            # replyMsg = reply.MusicMsg(toUser, fromUser, 'test', 'test', 'http://up.mcyt.net/md5/53/MjA1MTQ0NjI=_Qq4329912.mp3', 'http://up.mcyt.net/md5/53/MjA1MTQ0NjI=_Qq4329912.mp3')
+                            replyMsg = reply.TextMsg(toUser, fromUser, '<a href="http://music.163.com/m/song?id=476987525">☞来个Music吧☜</a>')
                         else:
                             msg = talk_tuling_api.talk(content, userid)  # 获取图灵机器人回复
                             replyMsg = reply.TextMsg(toUser, fromUser, msg)
