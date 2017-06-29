@@ -7,6 +7,7 @@ __time__ = '2017-06-23 9:23'
 根据官方API解析各种类型数据
 '''
 
+
 def parse_xml(web_data):
     if len(web_data) == 0:
         return None
@@ -20,6 +21,14 @@ def parse_xml(web_data):
         return VoiceMsg(xmlData)
     elif msg_type == 'event':
         return EventMsg(xmlData)
+    elif msg_type == 'video':
+        return VideoMsg(xmlData)
+    elif msg_type == 'shortvideo':
+        return ShortvideoMsg(xmlData)
+    elif msg_type == 'location':
+        return LocationMsg(xmlData)
+    elif msg_type == 'link':
+        return LinkMsg(xmlData)
 
 
 class Msg(object):
@@ -59,3 +68,34 @@ class VoiceMsg(Msg):
         self.MediaId = xmlData.find('MediaId').text
         self.Format = xmlData.find('Format').text
         self.Recognition = xmlData.find('Recognition').text
+
+
+class ShortvideoMsg(Msg):
+    def __init__(self, xmlData):
+        Msg.__init__(self, xmlData)
+        self.MediaId = xmlData.find('MediaId').text
+        self.ThumbMediaId = xmlData.find('ThumbMediaId').text
+
+
+class VideoMsg(Msg):
+    def __init__(self, xmlData):
+        Msg.__init__(self, xmlData)
+        self.MediaId = xmlData.find('MediaId').text
+        self.ThumbMediaId = xmlData.find('ThumbMediaId').text
+
+
+class LocationMsg(Msg):
+    def __init__(self, xmlData):
+        Msg.__init__(self, xmlData)
+        self.Location_X = xmlData.find('Location_X').text
+        self.Location_Y = xmlData.find('Location_Y').text
+        self.Scale = xmlData.find('Scale').text
+        self.Label = xmlData.find('Label').text
+
+
+class LinkMsg(object):
+    def __init__(self, xmlData):
+        Msg.__init__(self, xmlData)
+        self.Title = xmlData.find('Title').text
+        self.Description = xmlData.find('Description').text
+        self.Url = xmlData.find('Url').text

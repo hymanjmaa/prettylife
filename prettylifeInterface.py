@@ -54,6 +54,7 @@ class PrettyLifeInterface:
                     welcome = '我是马小骏，已经3岁啦☺\n' \
                               '智能系数不高，聊天解闷还凑合吧\n' \
                               '<a href="http://mp.weixin.qq.com/mp/homepage?__biz=MjM5NTQ5MDA0MQ==&hid=1&sn=c6a97850b5354f9ae48d8933214a166c#wechat_redirect">☞我的历史☜</a>\n' \
+                              '我默认是机器人模式，不信你试试？\n' \
                               '我还在学习中，学无止境嘛 '
                     replyMsg = reply.TextMsg(recMsg.FromUserName, recMsg.ToUserName, welcome)
                     return replyMsg.send()
@@ -93,13 +94,39 @@ class PrettyLifeInterface:
                     except Exception:
                         replyMsg = reply.TextMsg(toUser, fromUser, '这货还不够聪明，换句话聊天吧')
                     return replyMsg.send()
+
+                if recMsg.MsgType == 'video':  # 视频消息处理
+                    mediaId = recMsg.MediaId  # 取出用户发送视频素材id
+                    replyMsg = reply.VideoMsg(toUser, fromUser, mediaId)
+                    return replyMsg.send()
+
+                if recMsg.MsgType == 'shortvideo':  # 小视频消息处理
+                    mediaId = recMsg.MediaId  # 取出用户发送小视频素材id
+                    replyMsg = reply.ShortvideoMsg(toUser, fromUser, mediaId)
+                    return replyMsg.send()
+
+                if recMsg.MsgType == 'location':  # 地理位置消息处理
+                    Location_X = recMsg.Location_X
+                    Location_Y = recMsg.Location_Y
+                    Scale = recMsg.Scale
+                    Label = recMsg.Label
+                    replyMsg = reply.LocationMsg(toUser, fromUser, Location_X, Location_Y, Scale, Label)
+                    return replyMsg.send()
+
+                if recMsg.MsgType == 'link':
+                    Title = recMsg.Title
+                    Description = recMsg.Description
+                    Url = recMsg.Url
+                    replyMsg = reply.LinkMsg(toUser, fromUser, Title, Description, Url)
+                    return replyMsg.send()
+
                 else:
                     replyMsg = reply.TextMsg(toUser, fromUser, '这货还处理不了这种类型的聊天')
                     return replyMsg.send()
                     # return reply.Msg().send()
 
             else:
-                replyMsg = reply.TextMsg(recMsg.FromUserName, recMsg.ToUserName, '有bug你懂的')
+                replyMsg = reply.TextMsg(recMsg.FromUserName, recMsg.ToUserName, '服务器有点累，等会儿再来')
                 return replyMsg.send()
                 # print "暂且不处理"
                 # return "success"

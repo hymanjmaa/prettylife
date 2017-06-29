@@ -81,3 +81,102 @@ class VoiceMsg(Msg):
         </xml>
         """
         return XmlForm.format(**self.__dict)
+
+
+class VideoMsg(Msg):
+    def __init__(self, toUserName, fromUserName, mediaId):
+        self.__dict = dict()
+        self.__dict['ToUserName'] = toUserName
+        self.__dict['FromUserName'] = fromUserName
+        self.__dict['CreateTime'] = int(time.time())
+        self.__dict['MediaId'] = mediaId
+
+    def send(self):
+        XmlForm = """
+        <xml>
+        <ToUserName><![CDATA[{ToUserName}]]></ToUserName>
+        <FromUserName><![CDATA[{FromUserName}]]></FromUserName>
+        <CreateTime>{CreateTime}</CreateTime>
+        <MsgType><![CDATA[video]]></MsgType>
+        <Video>
+        <MediaId><![CDATA[{MediaId}]]></MediaId>
+        </Video>
+        </xml>
+        """
+        return XmlForm.format(**self.__dict)
+
+
+class ShortvideoMsg(Msg):
+    def __init__(self, toUserName, fromUserName, mediaId):
+        self.__dict = dict()
+        self.__dict['ToUserName'] = toUserName
+        self.__dict['FromUserName'] = fromUserName
+        self.__dict['CreateTime'] = int(time.time())
+        self.__dict['MediaId'] = mediaId
+
+    def send(self):
+        XmlForm = """
+        <xml>
+        <ToUserName><![CDATA[{ToUserName}]]></ToUserName>
+        <FromUserName><![CDATA[{FromUserName}]]></FromUserName>
+        <CreateTime>{CreateTime}</CreateTime>
+        <MsgType><![CDATA[shortvideo]]></MsgType>
+        <ShortVideo>
+        <MediaId><![CDATA[{MediaId}]]></MediaId>
+        </ShortVideo>
+        </xml>
+        """
+        return XmlForm.format(**self.__dict)
+
+
+class LocationMsg(Msg):
+    def __init__(self, toUserName, fromUserName, Location_X, Location_Y, Scale, Label):
+        self.__dict = dict()
+        self.__dict['ToUserName'] = toUserName
+        self.__dict['FromUserName'] = fromUserName
+        self.__dict['CreateTime'] = int(time.time())
+        self.__dict['Location_X'] = Location_X
+        self.__dict['Location_Y'] = Location_Y
+        self.__dict['Scale'] = Scale
+        self.__dict['Label'] = Label
+
+
+    def send(self):
+        XmlForm = """
+        <xml>
+        <ToUserName><![CDATA[{ToUserName}]]></ToUserName>
+        <FromUserName><![CDATA[{FromUserName}]]></FromUserName>
+        <CreateTime>{CreateTime}</CreateTime>
+        <MsgType><![CDATA[location]]></MsgType>
+        <Location_X><![CDATA[Location_X]]></Location_X>
+        <Location_Y><![CDATA[Location_Y]]></Location_Y>
+        <Scale><![CDATA[Scale]]></Scale>
+        <Label><![CDATA[Label]]></Label>
+        </xml>
+        """
+        return XmlForm.format(**self.__dict)
+
+
+class LinkMsg(Msg):
+    def __init__(self, toUserName, fromUserName, title, decription, url):
+        self.__dict = dict()
+        self.__dict['ToUserName'] = toUserName
+        self.__dict['FromUserName'] = fromUserName
+        self.__dict['CreateTime'] = int(time.time())
+        self.__dict['Title'] = title
+        self.__dict['Description'] = decription
+        self.__dict['Url'] = url
+
+    def send(self):
+        XmlForm = """
+        <xml>
+        <ToUserName><![CDATA[{ToUserName}]]></ToUserName>
+        <FromUserName><![CDATA[{FromUserName}]]></FromUserName>
+        <CreateTime>{CreateTime}</CreateTime>
+        <MsgType><![CDATA[shortvideo]]></MsgType>
+        <Title><![CDATA[Title]]></Title>
+        <Description><![CDATA[Description]]></Description>
+        <Url><![CDATA[Url]]></Url>
+        </xml>
+        """
+        return XmlForm.format(**self.__dict)
