@@ -89,7 +89,8 @@ class PrettyLifeInterface:
                     # mediaId = recMsg.MediaId  # 获取语音消息id
                     try:
                         msg = talk_tuling_api.talk(content, userid)  # 获取图灵机器人回复
-                        replyMsg = reply.TextMsg(toUser, fromUser, msg)
+                        replyMsg1 = reply.TextMsg(toUser, fromUser, '这货还不够聪明，换句话聊天吧')
+                        replyMsg = reply.TextMsg(toUser, fromUser, replyMsg1.send())
                         # replyMsg = reply.VoiceMsg(toUser, fromUser, mediaId)  # 原样回复用户发送的语音
                     except Exception:
                         replyMsg = reply.TextMsg(toUser, fromUser, '这货还不够聪明，换句话聊天吧')
