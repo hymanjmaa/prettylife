@@ -97,9 +97,8 @@ class PrettyLifeInterface:
 
                 if recMsg.MsgType == 'video':  # 视频消息处理
                     mediaId = recMsg.MediaId  # 取出用户发送视频素材id
-                    replyMsg = reply.VideoMsg(toUser, fromUser, mediaId)
-                    # msg = toUser + fromUser + mediaId
-                    # replyMsg = reply.TextMsg(toUser, fromUser, msg)
+                    # replyMsg = reply.VideoMsg(toUser, fromUser, mediaId)
+                    replyMsg = reply.TextMsg(toUser, fromUser, "你...你竟然给我发小电影!")
                     return replyMsg.send()
 
                 if recMsg.MsgType == 'location':  # 地理位置消息处理
@@ -107,14 +106,16 @@ class PrettyLifeInterface:
                     Location_Y = recMsg.Location_Y
                     Scale = recMsg.Scale
                     Label = recMsg.Label
-                    replyMsg = reply.LocationMsg(toUser, fromUser, Location_X, Location_Y, Scale, Label)
+                    loc = '您的坐标(x_'+Location_X+')(y_'+Location_Y+'),位于'+Label
+                    replyMsg = reply.TextMsg(toUser, fromUser, loc)
                     return replyMsg.send()
 
                 if recMsg.MsgType == 'link':
                     Title = recMsg.Title
                     Description = recMsg.Description
                     Url = recMsg.Url
-                    replyMsg = reply.LinkMsg(toUser, fromUser, Title, Description, Url)
+                    msg = Title+Description+Url
+                    replyMsg = reply.TextMsg(toUser, fromUser, msg)
                     return replyMsg.send()
 
                 else:

@@ -23,6 +23,8 @@ def parse_xml(web_data):
         return EventMsg(xmlData)
     elif msg_type == 'video':
         return VideoMsg(xmlData)
+    elif msg_type == 'location':
+        return LocationMsg(xmlData)
     elif msg_type == 'link':
         return LinkMsg(xmlData)
 
@@ -64,13 +66,6 @@ class VoiceMsg(Msg):
         self.MediaId = xmlData.find('MediaId').text
         self.Format = xmlData.find('Format').text
         self.Recognition = xmlData.find('Recognition').text
-
-
-class ShortvideoMsg(Msg):
-    def __init__(self, xmlData):
-        Msg.__init__(self, xmlData)
-        self.MediaId = xmlData.find('MediaId').text
-        self.ThumbMediaId = xmlData.find('ThumbMediaId').text
 
 
 class VideoMsg(Msg):
