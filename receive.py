@@ -18,6 +18,8 @@ def parse_xml(web_data):
         return ImageMsg(xmlData)
     elif msg_type == 'voice':
         return VoiceMsg(xmlData)
+    elif msg_type == "event":
+        return EventMsg(xmlData)
 
 
 class Msg(object):
