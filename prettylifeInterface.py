@@ -49,12 +49,13 @@ class PrettyLifeInterface:
             if isinstance(recMsg, receive.Msg):  # 判断是否为可回复消息
                 toUser = recMsg.FromUserName  # 获取消息发送方账号
                 fromUser = recMsg.ToUserName  # 获取开发者账号
-                userid = hashlib.md5(fromUser).hexdigest()  # 将发送方账号md5加密，传入图灵机器人接口便于机器人识别上下文
+                # 将发送方账号md5加密，传入图灵机器人接口便于机器人识别上下文
+                userid = hashlib.md5(fromUser).hexdigest()
 
                 if recMsg.MsgType == 'event':  # 事件消息处理
                     event = recMsg.Event
                     if event == 'subscribe':  # 关注事件
-                        replyMsg = reply.TextMsg(toUser, fromUser, "Hello "+toUser)
+                        replyMsg = reply.TextMsg(toUser, fromUser, "Hello")
                         return replyMsg.send()
                     elif event == 'unsubscribe':  # 取消关注事件
                         return ""
@@ -77,11 +78,11 @@ class PrettyLifeInterface:
 
                 if recMsg.MsgType == 'voice':  # 语音消息处理
                     content = recMsg.Recognition  # 取出语音识别后文本
-                    mediaId = recMsg.MediaId
+                    # mediaId = recMsg.MediaId  # 获取语音消息id
                     try:
                         msg = talk_tuling_api.talk(content, userid)  # 获取图灵机器人回复
-                        # replyMsg = reply.TextMsg(toUser, fromUser, msg)
-                        replyMsg = reply.VoiceMsg(toUser, fromUser, mediaId)
+                        replyMsg = reply.TextMsg(toUser, fromUser, msg)
+                        # replyMsg = reply.VoiceMsg(toUser, fromUser, mediaId)  # 原样回复用户发送的语音
                     except Exception:
                         replyMsg = reply.TextMsg(toUser, fromUser, '这货还不够聪明，换句话聊天吧')
                     return replyMsg.send()
