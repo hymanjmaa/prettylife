@@ -46,21 +46,28 @@ class PrettyLifeInterface:
             webData = web.data()  # Tencent服务器向SAE推送数据
             # print "Handle Post webdata is ", webData  # 后台打日志
             recMsg = receive.parse_xml(webData)  # 解析xml数据
-            if isinstance(recMsg, receive.Msg):  # 判断是否为可回复消息
+
+            # 事件消息处理
+            if recMsg.MsgType == 'event':
+                event = recMsg.Event
+                if event == 'subscribe':  # 关注事件
+                    welcome = '我是马小骏，已经3岁啦☺\n' \
+                              '智能系数不高，聊天解闷还凑合吧\n' \
+                              '<a href="http://mp.weixin.qq.com/mp/homepage?__biz=MjM5NTQ5MDA0MQ==&hid=1&sn=c6a97850b5354f9ae48d8933214a166c#wechat_redirect">☞我的历史☜</a>\n' \
+                              '我还在学习中，学无止境嘛 '
+                    replyMsg = reply.TextMsg(recMsg.FromUserName, recMsg.ToUserName, welcome)
+                    return replyMsg.send()
+                elif event == 'unsubscribe':  # 取消关注事件
+                    return ""
+                else:
+                    return ""
+
+            # 判断是否为可回复消息
+            if isinstance(recMsg, receive.Msg):
                 toUser = recMsg.FromUserName  # 获取消息发送方账号
                 fromUser = recMsg.ToUserName  # 获取开发者账号
                 # 将发送方账号md5加密，传入图灵机器人接口便于机器人识别上下文
                 userid = hashlib.md5(fromUser).hexdigest()
-
-                if recMsg.MsgType == 'event':  # 事件消息处理
-                    event = recMsg.Event
-                    if event == 'subscribe':  # 关注事件
-                        replyMsg = reply.TextMsg(toUser, fromUser, "Hello")
-                        return replyMsg.send()
-                    elif event == 'unsubscribe':  # 取消关注事件
-                        return ""
-                    else:
-                        return ""
 
                 if recMsg.MsgType == 'text':  # 文本消息处理
                     content = recMsg.Content  # 去除用户发送文本

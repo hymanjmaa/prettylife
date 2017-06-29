@@ -28,13 +28,16 @@ class Msg(object):
         self.FromUserName = xmlData.find('FromUserName').text
         self.CreateTime = xmlData.find('CreateTime').text
         self.MsgType = xmlData.find('MsgType').text
-        # self.MsgId = xmlData.find('MsgId').text
+        self.MsgId = xmlData.find('MsgId').text
 
 
-class EventMsg(Msg):
+class EventMsg(object):
     def __init__(self, xmlData):
-        Msg.__init__(self, xmlData)
         self.Event = xmlData.find("Event").text
+        self.ToUserName = xmlData.find('ToUserName').text
+        self.FromUserName = xmlData.find('FromUserName').text
+        self.CreateTime = xmlData.find('CreateTime').text
+        self.MsgType = xmlData.find('MsgType').text
 
 
 class TextMsg(Msg):
