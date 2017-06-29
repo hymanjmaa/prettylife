@@ -107,7 +107,7 @@ class VideoMsg(Msg):
 
 
 class MusicMsg(Msg):
-    def __init__(self, toUserName, fromUserName, Title, Description, MusicUrl, HQMusicUrl, ThumbMediaId):
+    def __init__(self, toUserName, fromUserName, Title, Description, MusicUrl, HQMusicUrl):
         self.__dict = dict()
         self.__dict['ToUserName'] = toUserName
         self.__dict['FromUserName'] = fromUserName
@@ -116,7 +116,7 @@ class MusicMsg(Msg):
         self.__dict['Description'] = Description
         self.__dict['MusicUrl'] = MusicUrl
         self.__dict['HQMusicUrl'] = HQMusicUrl
-        self.__dict['ThumbMediaId'] = ThumbMediaId
+        # self.__dict['ThumbMediaId'] = ThumbMediaId
 
 
     def send(self):
@@ -131,7 +131,6 @@ class MusicMsg(Msg):
         <Description><![CDATA[Description]]></Description>
         <MusicUrl><![CDATA[MusicUrl]]></MusicUrl>
         <HQMusicUrl><![CDATA[HQMusicUrl]]></HQMusicUrl>
-        <ThumbMediaId><![CDATA[ThumbMediaId]]></ThumbMediaId>
         </Music>
         </xml>
         """
