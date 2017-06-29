@@ -73,8 +73,11 @@ class PrettyLifeInterface:
                 if recMsg.MsgType == 'text':  # 文本消息处理
                     content = recMsg.Content  # 去除用户发送文本
                     try:
-                        msg = talk_tuling_api.talk(content, userid)  # 获取图灵机器人回复
-                        replyMsg = reply.TextMsg(toUser, fromUser, msg)
+                        if content == 'love':
+                            replyMsg = reply.MusicMsg(toUser, fromUser, 'test', 'test ', 'http://sc1.111ttt.com/2016/1/12/10/205101753237.mp3', 'http://sc1.111ttt.com/2016/1/12/10/205101753237.mp3', '1')
+                        else:
+                            msg = talk_tuling_api.talk(content, userid)  # 获取图灵机器人回复
+                            replyMsg = reply.TextMsg(toUser, fromUser, msg)
                     except Exception:
                         replyMsg = reply.TextMsg(toUser, fromUser, "没听懂咋整啊")
                     return replyMsg.send()
@@ -116,7 +119,7 @@ class PrettyLifeInterface:
                         Description = recMsg.Description
                         Url = recMsg.Url
                         msg = Title+Description+Url
-                        replyMsg = reply.TextMsg(toUser, fromUser, msg)
+                        replyMsg = reply.TextMsg(toUser, fromUser, '这是......?督促我学习？')
                     except Exception:
                         replyMsg = reply.TextMsg(toUser, fromUser, "爱学习的好孩子,love you")
                     return replyMsg.send()

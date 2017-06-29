@@ -106,29 +106,33 @@ class VideoMsg(Msg):
         return XmlForm.format(**self.__dict)
 
 
-class LocationMsg(Msg):
-    def __init__(self, toUserName, fromUserName, Location_X, Location_Y, Scale, Label):
+class MusicMsg(Msg):
+    def __init__(self, toUserName, fromUserName, Title, Description, MusicUrl, HQMusicUrl, ThumbMediaId):
         self.__dict = dict()
         self.__dict['ToUserName'] = toUserName
         self.__dict['FromUserName'] = fromUserName
         self.__dict['CreateTime'] = int(time.time())
-        self.__dict['Location_X'] = Location_X
-        self.__dict['Location_Y'] = Location_Y
-        self.__dict['Scale'] = Scale
-        self.__dict['Label'] = Label
+        self.__dict['Title'] = Title
+        self.__dict['Description'] = Description
+        self.__dict['MusicUrl'] = MusicUrl
+        self.__dict['HQMusicUrl'] = HQMusicUrl
+        self.__dict['ThumbMediaId'] = ThumbMediaId
 
 
     def send(self):
         XmlForm = """
         <xml>
-        <ToUserName><![CDATA[{ToUserName}]]></ToUserName>
-        <FromUserName><![CDATA[{FromUserName}]]></FromUserName>
+        <ToUserName><![CDATA[ToUserName]]></ToUserName>
+        <FromUserName><![CDATA[FromUserName]]></FromUserName>
         <CreateTime>{CreateTime}</CreateTime>
-        <MsgType><![CDATA[location]]></MsgType>
-        <Location_X><![CDATA[Location_X]]></Location_X>
-        <Location_Y><![CDATA[Location_Y]]></Location_Y>
-        <Scale><![CDATA[Scale]]></Scale>
-        <Label><![CDATA[Label]]></Label>
+        <MsgType><![CDATA[music]]></MsgType>
+        <Music>
+        <Title><![CDATA[Title]]></Title>
+        <Description><![CDATA[Description]]></Description>
+        <MusicUrl><![CDATA[MusicUrl]]></MusicUrl>
+        <HQMusicUrl><![CDATA[HQMusicUrl]]></HQMusicUrl>
+        <ThumbMediaId><![CDATA[ThumbMediaId]]></ThumbMediaId>
+        </Music>
         </xml>
         """
         return XmlForm.format(**self.__dict)
