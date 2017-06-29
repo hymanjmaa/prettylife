@@ -89,8 +89,7 @@ class PrettyLifeInterface:
                     # mediaId = recMsg.MediaId  # 获取语音消息id
                     try:
                         msg = talk_tuling_api.talk(content, userid)  # 获取图灵机器人回复
-                        replyMsg1 = reply.TextMsg(toUser, fromUser, '这货还不够聪明，换句话聊天吧')
-                        replyMsg = reply.TextMsg(toUser, fromUser, replyMsg1.send())
+                        replyMsg = reply.TextMsg(toUser, fromUser, msg)
                         # replyMsg = reply.VoiceMsg(toUser, fromUser, mediaId)  # 原样回复用户发送的语音
                     except Exception:
                         replyMsg = reply.TextMsg(toUser, fromUser, '这货还不够聪明，换句话聊天吧')
@@ -98,8 +97,9 @@ class PrettyLifeInterface:
 
                 if recMsg.MsgType == 'video':  # 视频消息处理
                     mediaId = recMsg.MediaId  # 取出用户发送视频素材id
-                    replyMsgq = reply.VideoMsg(toUser, fromUser, mediaId)
-                    replyMsg = reply.TextMsg(toUser, fromUser, replyMsgq.send())
+                    # replyMsg = reply.VideoMsg(toUser, fromUser, mediaId)
+                    msg = toUser + fromUser + mediaId
+                    replyMsg = reply.TextMsg(toUser, fromUser, msg)
                     return replyMsg.send()
 
                 if recMsg.MsgType == 'location':  # 地理位置消息处理
