@@ -5,6 +5,8 @@ import json
 __author__ = 'Hyman'
 __time__ = '2017-06-24 1:10'
 
+# 图灵机器人接口
+
 global s
 s = requests.session()
 

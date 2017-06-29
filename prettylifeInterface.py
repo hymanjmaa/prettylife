@@ -43,43 +43,59 @@ class PrettyLifeInterface:
 
     def POST(self):
         try:
-            webData = web.data()
+            webData = web.data()  # Tencent服务器向SAE推送数据
             # print "Handle Post webdata is ", webData  # 后台打日志
-            recMsg = receive.parse_xml(webData)
-            if isinstance(recMsg, receive.Msg):
-                toUser = recMsg.FromUserName
-                fromUser = recMsg.ToUserName
-                userid = hashlib.md5(fromUser).hexdigest()
-                if recMsg.MsgType == 'text':
-                    content = recMsg.Content
+            recMsg = receive.parse_xml(webData)  # 解析xml数据
+            if isinstance(recMsg, receive.Msg):  # 判断是否为可回复消息
+                toUser = recMsg.FromUserName  # 获取消息发送方账号
+                fromUser = recMsg.ToUserName  # 获取开发者账号
+                userid = hashlib.md5(fromUser).hexdigest()  # 将发送方账号md5加密，传入图灵机器人接口便于机器人识别上下文
+
+                if recMsg.MsgType == 'event':  # 事件消息处理
+                    event = recMsg.Event
+                    if event == 'subscribe':  # 关注事件
+                        replyMsg = reply.TextMsg(toUser, fromUser, "Hello "+toUser)
+                        return replyMsg.send()
+                    elif event == 'unsubscribe':  # 取消关注事件
+                        return ""
+                    else:
+                        return ""
+
+                if recMsg.MsgType == 'text':  # 文本消息处理
+                    content = recMsg.Content  # 去除用户发送文本
                     try:
-                        msg = talk_tuling_api.talk(content, userid)
+                        msg = talk_tuling_api.talk(content, userid)  # 获取图灵机器人回复
                         replyMsg = reply.TextMsg(toUser, fromUser, msg)
-                    except:
+                    except Exception:
                         replyMsg = reply.TextMsg(toUser, fromUser, "没听懂咋整啊")
-                        # replyMsg = reply.TextMsg(toUser, fromUser, content)
                     return replyMsg.send()
-                if recMsg.MsgType == 'image':
-                    mediaId = recMsg.MediaId
+
+                if recMsg.MsgType == 'image':  # 图片消息处理
+                    mediaId = recMsg.MediaId  # 取出用户发送图片素材id
                     replyMsg = reply.ImageMsg(toUser, fromUser, mediaId)
                     return replyMsg.send()
-                if recMsg.MsgType == 'voice':
-                    content = recMsg.Recognition
+
+                if recMsg.MsgType == 'voice':  # 语音消息处理
+                    content = recMsg.Recognition  # 取出语音识别后文本
+                    mediaId = recMsg.MediaId
                     try:
-                        msg = talk_tuling_api.talk(content, userid)
-                        replyMsg = reply.TextMsg(toUser, fromUser, msg)
-                    except:
+                        msg = talk_tuling_api.talk(content, userid)  # 获取图灵机器人回复
+                        # replyMsg = reply.TextMsg(toUser, fromUser, msg)
+                        replyMsg = reply.VoiceMsg(toUser, fromUser, mediaId)
+                    except Exception:
                         replyMsg = reply.TextMsg(toUser, fromUser, '这货还不够聪明，换句话聊天吧')
                     return replyMsg.send()
                 else:
                     replyMsg = reply.TextMsg(toUser, fromUser, '这货还处理不了这种类型的聊天')
                     return replyMsg.send()
                     # return reply.Msg().send()
+
             else:
                 replyMsg = reply.TextMsg(recMsg.FromUserName, recMsg.ToUserName, '有bug你懂的')
                 return replyMsg.send()
                 # print "暂且不处理"
                 # return "success"
+
         except Exception, Argment:
             return Argment
 

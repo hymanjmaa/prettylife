@@ -5,6 +5,7 @@ import json
 __author__ = 'Hyman'
 __time__ = '2017-06-24 18:46'
 
+# 获取accessToken
 
 class Basic:
     def __init__(self):

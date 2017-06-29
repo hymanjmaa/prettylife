@@ -8,6 +8,8 @@ from poster.streaminghttp import register_openers
 __author__ = 'Hyman'
 __time__ = '2017-06-24 19:15'
 
+# 上传素材，获取素材对应mediaId
+
 
 class Media(object):
     def __init__(self):

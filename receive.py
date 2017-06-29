@@ -3,6 +3,9 @@ import xml.etree.ElementTree as ET
 __author__ = 'Hyman'
 __time__ = '2017-06-23 9:23'
 
+'''
+根据官方API解析各种类型数据
+'''
 
 def parse_xml(web_data):
     if len(web_data) == 0:
@@ -24,6 +27,12 @@ class Msg(object):
         self.CreateTime = xmlData.find('CreateTime').text
         self.MsgType = xmlData.find('MsgType').text
         self.MsgId = xmlData.find('MsgId').text
+
+
+class EventMsg(Msg):
+    def __init__(self, xmlData):
+        Msg.__init__(self, xmlData)
+        self.Event = xmlData.find("Event").text
 
 
 class TextMsg(Msg):
