@@ -97,10 +97,9 @@ class VideoMsg(Msg):
         <ToUserName><![CDATA[{ToUserName}]]></ToUserName>
         <FromUserName><![CDATA[{FromUserName}]]></FromUserName>
         <CreateTime>{CreateTime}</CreateTime>
-        <MsgType><![CDATA[video]]></MsgType>
         <Video>
-        <MediaId><![CDATA[{MediaId}]]></MediaId>
-        </Video>
+        <MediaId><![CDATA[MediaId]]></MediaId>
+        </Video> 
         </xml>
         """
         return XmlForm.format(**self.__dict)
@@ -122,8 +121,8 @@ class ShortvideoMsg(Msg):
         <CreateTime>{CreateTime}</CreateTime>
         <MsgType><![CDATA[shortvideo]]></MsgType>
         <Video>
-        <MediaId><![CDATA[{MediaId}]]></MediaId>
-        </Video>
+        <MediaId><![CDATA[MediaId]]></MediaId>
+        </Video> 
         </xml>
         """
         return XmlForm.format(**self.__dict)
