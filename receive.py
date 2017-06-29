@@ -23,8 +23,6 @@ def parse_xml(web_data):
         return EventMsg(xmlData)
     elif msg_type == 'video':
         return VideoMsg(xmlData)
-    elif msg_type == 'shortvideo':
-        return ShortvideoMsg(xmlData)
     elif msg_type == 'location':
         return LocationMsg(xmlData)
     elif msg_type == 'link':

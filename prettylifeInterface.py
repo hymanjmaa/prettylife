@@ -97,16 +97,8 @@ class PrettyLifeInterface:
 
                 if recMsg.MsgType == 'video':  # 视频消息处理
                     mediaId = recMsg.MediaId  # 取出用户发送视频素材id
-                    try:
-                        replyMsg = reply.VideoMsg(toUser, fromUser, mediaId)
-                    except Exception:
-                        replyMsg = reply.TextMsg(toUser, fromUser, replyMsg.send())
-                    return replyMsg.send()
-
-                if recMsg.MsgType == 'shortvideo':  # 小视频消息处理
-                    mediaId = recMsg.MediaId  # 取出用户发送小视频素材id
-                    replyMsg = reply.ShortvideoMsg(toUser, fromUser, mediaId)
-                    # replyMsg = reply.TextMsg(toUser, fromUser, "shortvideo")
+                    replyMsgq = reply.VideoMsg(toUser, fromUser, mediaId)
+                    replyMsg = reply.TextMsg(toUser, fromUser, replyMsgq.send())
                     return replyMsg.send()
 
                 if recMsg.MsgType == 'location':  # 地理位置消息处理
