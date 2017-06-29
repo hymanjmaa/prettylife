@@ -121,9 +121,9 @@ class ShortvideoMsg(Msg):
         <FromUserName><![CDATA[{FromUserName}]]></FromUserName>
         <CreateTime>{CreateTime}</CreateTime>
         <MsgType><![CDATA[shortvideo]]></MsgType>
-        <ShortVideo>
+        <Video>
         <MediaId><![CDATA[{MediaId}]]></MediaId>
-        </ShortVideo>
+        </Video>
         </xml>
         """
         return XmlForm.format(**self.__dict)
